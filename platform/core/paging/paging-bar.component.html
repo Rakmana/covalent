@@ -1,0 +1,32 @@
+<div layout="row" layout-align="end center" class="md-caption td-paging-bar">
+  <ng-content select="[td-paging-bar-label]"></ng-content>
+  <md-select [(ngModel)]="pageSize">
+    <template let-size ngFor [ngForOf]="pageSizes">
+      <md-option [value]="size">
+        {{size}}
+      </md-option>
+    </template>
+    <md-option *ngIf="pageSizeAll" [value]="total">{{pageSizeAllText}}</md-option>
+  </md-select>
+  <div>
+    <ng-content></ng-content>
+  </div>
+  <div class="td-paging-bar-navigation">
+    <button md-icon-button type="button" *ngIf="firstLast" [disabled]="isMinPage()" (click)="firstPage()">
+      <md-icon *ngIf="!rtl">skip_previous</md-icon>
+      <md-icon *ngIf="rtl">skip_next</md-icon>
+    </button>
+    <button md-icon-button type="button" [disabled]="isMinPage()" (click)="prevPage()">
+      <md-icon *ngIf="!rtl">navigate_before</md-icon>
+      <md-icon *ngIf="rtl">navigate_next</md-icon>
+    </button>
+    <button md-icon-button type="button" [disabled]="isMaxPage()" (click)="nextPage()">
+      <md-icon *ngIf="!rtl">navigate_next</md-icon>
+      <md-icon *ngIf="rtl">navigate_before</md-icon>
+    </button>
+    <button md-icon-button type="button" *ngIf="firstLast" [disabled]="isMaxPage()" (click)="lastPage()">
+      <md-icon *ngIf="!rtl">skip_next</md-icon>
+      <md-icon *ngIf="rtl">skip_previous</md-icon>
+    </button>
+  </div>
+</div>
